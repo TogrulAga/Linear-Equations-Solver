@@ -1,0 +1,25 @@
+type: code
+files:
+- name: main.py
+  visible: true
+  text: |-
+    class Date:
+
+        def __init__(self, day, month):
+            self.day = day
+            self.month = month
+
+        # use appropriate decorator
+        def date(...):
+            ...
+  learner_created: false
+feedback_link: https://hyperskill.org/learn/step/10158#comment
+status: Solved
+feedback:
+  message: |-
+    <html>[+] Test #1. OK
+    [+] Test #2. OK
+
+    2 of 2 test(s) passed.</html>
+  time: Fri, 20 Aug 2021 09:58:41 UTC
+record: -1

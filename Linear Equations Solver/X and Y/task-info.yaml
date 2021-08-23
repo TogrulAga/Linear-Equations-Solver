@@ -1,0 +1,64 @@
+type: edu
+files:
+- name: linear/solver.py
+  visible: true
+  text: |
+    print('Hello, World!')
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from typing import List, Any
+    from hstest.stage_test import StageTest
+    from hstest.test_case import TestCase
+    from hstest.check_result import CheckResult
+
+
+    class TestTheFirst(StageTest):
+
+        def generate(self) -> List[TestCase]:
+            list_tests = [
+                TestCase(stdin="4 5 7\n3 9 9"),
+                TestCase(stdin="1 2 3\n4 5 6"),
+                TestCase(stdin="1.2 3.4 5.6\n7.8 9.0 12.3"),
+                TestCase(stdin="23.21 32.12 65.43\n1 0 1")
+            ]
+
+            for test in list_tests:
+                test.attach = self.calculate(test.input)
+
+            return list_tests
+
+        def calculate(self, output):
+            output1, output2 = output.split('\n')
+            a, b, c = [float(i) for i in output1.split()]
+            d, e, f = [float(i) for i in output2.split()]
+
+            y = (f - c * (d / a)) / (e - b * (d / a))
+            x = (c - b * y) / a
+
+            return x, y
+
+        def check(self, reply: str, attach) -> CheckResult:
+            try:
+                replies = tuple(float(i) for i in reply.split())
+                if len(replies) != len(attach):
+                    return CheckResult.wrong("")
+                for i in range(len(attach)):
+                    if abs(replies[i] - attach[i]) > 0.001:
+                        return CheckResult.wrong("The output is incorrect")
+            except ValueError:
+                return CheckResult.wrong("Can't parse numbers - check if you don't print any additional symbols "
+                                         "except a space between the numbers")
+            return CheckResult.correct()
+
+
+    if __name__ == '__main__':
+        TestTheFirst('linear.solver').run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/144/stages/777/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 18 Aug 2021 20:23:00 UTC
+record: 2

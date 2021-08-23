@@ -1,0 +1,84 @@
+<h2>Description</h2>
+
+<p>In this stage, you are going to work with even more variables! It is important to understand that if the number of equations equals the number of variables, the whole unit has only one solution. Special cases will be accounted for in the next stage.</p>
+
+<p>A set of two (or more) linear equations is usually called a <strong>system of linear equations</strong>.</p>
+
+<p><strong>Gauss-Jordan Elimination </strong>is one of the most popular ways to find a solution to a system. A detailed explanation of the method can be found in Youtube tutorials: we recommend checking out <a target="_blank" href="https://www.youtube.com/watch?v=AhUyh-2aPEc" rel="noopener noreferrer nofollow">Gauss Elimination Method</a> or <a target="_blank" href="https://www.youtube.com/watch?v=2j5Ic2V7wq4" rel="noopener noreferrer nofollow">Gaussian Elimination</a>.</p>
+
+<p>You can see an example of a general linear equation system below. The variables are <span class="math-tex">\(x_1, x_2, ..., x_n\)</span>. The coefficients are <span class="math-tex">\(a_{i1}, a_{i2}, ... a_{in}\)</span> for <span class="math-tex">\(i\)</span> number of rows. The constants are <span class="math-tex">\(b_1, b_2, ... b_n\)</span>.</p>
+
+<p><span class="math-tex">\(\begin{cases} \begin{aligned} a_{11}x_1 &amp; + a_{12}x_2+... +a_{1n}x_n = b_1 \\ a_{21}x_1 &amp; + a_{22}x_2 +... + a_{2n}x_n = b_2 \\ &amp;... \\ a_{n1}x_1 &amp; + a_{n2}x_2 +... + a_{nn}x_n = b_n \\ \end{aligned} \end{cases}\)</span></p>
+
+<p>If you've seen the videos, the algorithm should reduce the first column of coefficients to zero except for the first coefficient, which should be equal to <span class="math-tex">\(1\)</span>. Also, note the letters <span class="math-tex">\(c\)</span> and <span class="math-tex">\(d\)</span> instead of <span class="math-tex">\(a\)</span> and <span class="math-tex">\(b\)</span>. It means that after some calculations, these coefficients would turn into other coefficients, so we cannot use the letters <span class="math-tex">\(a\)</span> and <span class="math-tex">\(b\)</span> anymore as they refer to the initial coefficients.</p>
+
+<p><span class="math-tex">\(\begin{cases} \begin{aligned} x_1 &amp; + c_{12}x_2+... +c_{1n}x_n = d_1 \\ 0 &amp; + c_{22}x_2 +... + c_{2n}x_n = d_2 \\ 0 &amp; +... \\ 0 &amp; + c_{n2}x_2 +... + c_{nn}x_n = d_n \\ \end{aligned} \end{cases}\)</span></p>
+
+<p>After that, you need to reduce the second column to zero from the third row. The second row should contain the coefficient equal to <span class="math-tex">\(1\)</span>.</p>
+
+<p><span class="math-tex">\(\begin{cases} \begin{alignedat}{2} x_1 &amp; \&gt;+\&gt; &amp; c_{12}x_2 &amp; +... +c_{1n}x_n = d_1 \\ 0 &amp; \&gt;+\&gt; &amp; x_2 &amp; +... + e_{2n}x_n = f_2 \\ 0 &amp; \&gt;+\&gt; &amp; 0 &amp; + ... \\ 0 &amp; \&gt;+\&gt; &amp; 0 &amp; +... + e_{nn}x_n = f_n \\ \end{alignedat} \end{cases}\)</span></p>
+
+<p>The same goes for the rest of the columns. In the end, the system should look like that:</p>
+
+<p><span class="math-tex">\(\begin{cases} \begin{alignedat}{4} x_1 &amp; \&gt;+\&gt; &amp; c_{12}x_2 &amp; + ... &amp; \&gt;+\&gt; &amp; c_{1n}x_n &amp; = d_1 \\ 0 &amp; \&gt;+\&gt; &amp; x_2 &amp; +... &amp; \&gt;+\&gt;&amp; e_{2n}x_n &amp; = f_2 \\ &amp; ... \\ 0 &amp; \&gt;+\&gt; &amp; 0 &amp; +... + 0 &amp; \&gt;+\&gt; &amp; \&gt;\&gt;\&gt;\&gt;\&gt;\&gt; x_n &amp; = g_n \\ \end{alignedat} \end{cases}\)</span></p>
+
+<p>The second part of the algorithm is to iterate rows from the last to the first and reduce the top part of the linear system to zero. In the end, the linear system would contain only the diagonal elements.</p>
+
+<p><span class="math-tex">\(\begin{cases} \begin{alignedat}{4} x_1 &amp; \&gt;+\&gt; &amp; 0 &amp; + ... &amp; \&gt;+\&gt; &amp; \&gt;\&gt;0 &amp; = k_1 \\ 0 &amp; \&gt;+\&gt; &amp; x_2 &amp; + 0+ ... &amp; \&gt;+\&gt;&amp; \&gt;\&gt;0 &amp; = f_2 \\ &amp; ... \\ 0 &amp; \&gt;+\&gt; &amp; 0 &amp; +... + 0 &amp; \&gt;+\&gt; &amp; x_n &amp; = g_n \\ \end{alignedat} \end{cases}\)</span></p>
+
+<p>The right part here would be the solution to the system.</p>
+
+<p>In this stage, you need to write a program that reads the coefficients from a file, solves the system of linear equations, and then writes the answer to another file. Pass the paths to files with command-line arguments. The answers in the file should be separated by <code class="java">\n</code>. Also remember, that you should output the steps only to the console, not to the file.</p>
+
+<p>The first line of the file should contain the <em>N</em> number, which is the number of variables and also the number of equations. The next equation line (that is, again, the <em>N</em> number) in the system should contain <span class="math-tex">\(N+1\)</span> numbers. The program also should output all the row manipulations when solving a system of linear equations.</p>
+
+<h2>Objectives</h2>
+
+<p>Write a program that solves a system of linear equations, outputs the result, and then writes it to a file.</p>
+
+<p><span class="math-tex">\(\begin{cases} \begin{aligned} a_{11}x_1 &amp; + a_{12}x_2+... +a_{1n}x_n = b_1 \\ a_{21}x_1 &amp; + a_{22}x_2 +... + a_{2n}x_n = b_2 \\ &amp;... \\ a_{n1}x_1 &amp; + a_{n2}x_2 +... + a_{nn}x_n = b_n \\ \end{aligned} \end{cases}\)</span></p>
+
+<p>In this stage, your program should:</p>
+
+<ol>
+	<li>Read the file paths using command-line arguments.</li>
+	<li>Open the file (passed as '--infile' to the program) that contains the number of equations and coefficients, and then parse it. </li>
+	<li>Solve the system of linear equations indicated above; the program should print all the steps in the console, including the solution.</li>
+	<li>Write the result to another file passed as '--outfile' to the program.</li>
+</ol>
+
+<h2>Example</h2>
+
+<p>The greater-than symbol followed by space (<code class="java">&gt; </code>) represents the user input. Note that it's not part of the input. </p>
+
+<p>Suppose you have a file named <code class="java">in.txt</code> with the following content:</p>
+
+<pre><code class="language-no-highlight">3
+1 1 2 9
+2 4 -3 1
+3 6 -5 0</code></pre>
+
+<p>Which corresponds to the following system:</p>
+
+<p><span class="math-tex">\(\begin{cases} 1*x_1 + 1*x_2 + 2*x_3 = 9 \\ 2*x_1 +4*x_2 - 3*x_3 = 1 \\ 3* x_1 + 6*x_2 - 5*x_3 = 0 \\ \end{cases}\)</span></p>
+
+<p>This is an example of your program. The console output is not checked by the tests, so use it to debug your program. The tests only check the output file.</p>
+
+<pre><code class="language-no-highlight">&gt; python3 linearsolver.py --infile in.txt --outfile out.txt
+Start solving the equation.
+-2 * R1 + R2 -&gt; R2
+-3 * R1 + R3 -&gt; R3
+0.5 * R2 -&gt; R2
+-3 * R2 + R3 -&gt; R3
+-2 * R3 -&gt; R3
+3.5 * R3 + R2 -&gt; R2
+-2 * R3 + R1 -&gt; R1
+-1 * R2 + R1 -&gt; R1
+The solution is: (1.0, 2.0, 3.0)
+Saved to out.txt</code></pre>
+
+<p>The<code class="java">out.txt</code> file should look like this (each answer on a separate line without any excess symbols).</p>
+
+<pre><code class="language-no-highlight">1.0
+2.0
+3.0</code></pre>

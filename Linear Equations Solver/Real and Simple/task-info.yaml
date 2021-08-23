@@ -1,0 +1,56 @@
+type: edu
+files:
+- name: tests.py
+  visible: false
+  text: |
+    from typing import List, Any
+    from hstest.stage_test import StageTest
+    from hstest.test_case import TestCase
+    from hstest.check_result import CheckResult
+
+
+    class TestTheFirst(StageTest):
+
+        def generate(self) -> List[TestCase]:
+            list_tests = [
+                TestCase(stdin="5 3"),
+                TestCase(stdin="12 67"),
+                TestCase(stdin="12 12"),
+                TestCase(stdin="-1 1"),
+                TestCase(stdin="2 -3"),
+                TestCase(stdin="2.34 12.23")
+            ]
+
+            for test in list_tests:
+                test.attach = self.calculate(test.input)
+
+            return list_tests
+
+        def calculate(self, output):
+            a, b = [float(i) for i in output.split()]
+            return str(b / a)
+
+        def check(self, reply: str, attach) -> CheckResult:
+            try:
+                if abs(float(reply) - float(attach)) > 0.001:
+                    return CheckResult.wrong("The output is incorrect")
+            except ValueError:
+                return CheckResult.wrong("Can't parse numbers - check if you don't print any additional symbols "
+                                         "except a space between the numbers")
+            return CheckResult.correct()
+
+
+    if __name__ == '__main__':
+        TestTheFirst('linear.solver').run_tests()
+  learner_created: false
+- name: linear/solver.py
+  visible: true
+  text: |
+    print('Hello, World!')
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/144/stages/776/implement#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: Wed, 18 Aug 2021 20:05:49 UTC
+record: 1
